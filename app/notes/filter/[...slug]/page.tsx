@@ -5,9 +5,36 @@ import {
 } from "@tanstack/react-query";
 import fetchNotes from "@/lib/api";
 import NoteDetailsClient from "./Notes.client";
+import { Metadata } from "next";
 
 interface NotesProps {
   params: Promise<{ slug: string[] }>;
+}
+
+export async function generateMetadata({
+  params,
+}: NotesProps): Promise<Metadata> {
+  const { slug } = await params;
+  const tag = slug[0] === "All" ? undefined : slug[0];
+  return {
+    title: tag ? `Notes: ${tag}` : "All Notes",
+    description: tag ? `Notes filtered by tag: ${tag}` : "All notes",
+    openGraph: {
+      title: tag ? `Notes: ${tag}` : "All Notes",
+      description: tag ? `Notes filtered by tag: ${tag}` : "All notes",
+      url: `https://08-zustand-livid-omega.vercel.app/notes/filter/${slug[0]}`,
+      siteName: "NoteHub",
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: tag ? `Notes: ${tag}` : "All notes",
+        },
+      ],
+      type: "article",
+    },
+  };
 }
 
 const Notes = async ({ params }: NotesProps) => {
