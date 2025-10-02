@@ -15,6 +15,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Note Hub",
   description: "Create note hub",
+  icons: {
+    icon: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+  },
   openGraph: {
     title: "Note Hub",
     description: "Create note hub",
