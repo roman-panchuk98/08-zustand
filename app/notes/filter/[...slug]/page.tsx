@@ -32,7 +32,6 @@ export async function generateMetadata({
           alt: tag ? `Notes: ${tag}` : "All notes",
         },
       ],
-      type: "article",
     },
   };
 }

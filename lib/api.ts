@@ -6,7 +6,7 @@ interface NoteHttpResponse {
   totalPages: number;
 }
 
-interface createNotePost {
+export interface createNotePost {
   title: string;
   content: string;
   tag: NoteTag;

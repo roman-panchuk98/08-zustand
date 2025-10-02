@@ -23,6 +23,10 @@
   resize: none;
 }
 
+.select {
+  cursor: pointer;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;

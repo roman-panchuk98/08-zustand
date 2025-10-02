@@ -27,7 +27,6 @@ export const metadata: Metadata = {
         alt: "Note Hub",
       },
     ],
-    type: "website",
   },
 };
 

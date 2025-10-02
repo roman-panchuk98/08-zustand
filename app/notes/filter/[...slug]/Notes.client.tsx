@@ -11,11 +11,11 @@ import SearchBox from "../../../../components/SearchBox/SearchBox";
 import toast, { Toaster } from "react-hot-toast";
 import NoteForm from "../../../../components/NoteForm/NoteForm";
 import { useDebouncedCallback } from "use-debounce";
+import Link from "next/link";
 
 export default function NotesClient({ tag }: { tag?: string }) {
   const [searchWord, setSearchWord] = useState<string>("");
   const [page, setPage] = useState(1);
-  const [openModal, setOpenModal] = useState(false);
 
   const handleChange = useDebouncedCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,13 +37,6 @@ export default function NotesClient({ tag }: { tag?: string }) {
     }
   }, [data]);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
   return (
     <div className={css.app}>
       <div className={css.toolbar}>
@@ -56,18 +49,13 @@ export default function NotesClient({ tag }: { tag?: string }) {
           />
         )}
         {
-          <button className={css.button} onClick={handleOpenModal}>
+          <Link className={css.button} href={"/notes/action/create"}>
             Create note +
-          </button>
+          </Link>
         }
       </div>
       <Toaster />
       {data && data?.notes.length > 0 && <NoteList notes={data?.notes} />}
-      {openModal && (
-        <Modal onClose={handleCloseModal}>
-          <NoteForm onClose={handleCloseModal} />
-        </Modal>
-      )}
     </div>
   );
 }
