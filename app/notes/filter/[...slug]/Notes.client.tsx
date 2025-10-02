@@ -1,15 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import fetchNotes from "../../../../lib/api";
 import css from "./page.module.css";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import NoteList from "../../../../components/NoteList/NoteList";
 import Pagination from "../../../../components/Pagination/Pagination";
-import Modal from "../../../../components/Modal/Modal";
 import SearchBox from "../../../../components/SearchBox/SearchBox";
-import toast, { Toaster } from "react-hot-toast";
-import NoteForm from "../../../../components/NoteForm/NoteForm";
 import { useDebouncedCallback } from "use-debounce";
 import Link from "next/link";
 
@@ -31,12 +28,6 @@ export default function NotesClient({ tag }: { tag?: string }) {
     placeholderData: keepPreviousData,
   });
 
-  useEffect(() => {
-    if (data?.notes.length === 0) {
-      toast.error("There is nothing on request.");
-    }
-  }, [data]);
-
   return (
     <div className={css.app}>
       <div className={css.toolbar}>
@@ -54,7 +45,6 @@ export default function NotesClient({ tag }: { tag?: string }) {
           </Link>
         }
       </div>
-      <Toaster />
       {data && data?.notes.length > 0 && <NoteList notes={data?.notes} />}
     </div>
   );
